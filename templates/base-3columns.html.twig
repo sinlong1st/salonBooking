@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <div class="col col-left">
+        {% block leftcolumn %}
+        {% endblock %}
+    </div>
+    <div class="col col-center">
+        {% block centercolumn %}
+        {% endblock %}
+    </div>
+    <div class="col col-right">
+        {% block rightcolumn %}
+        {% endblock %}
+    </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Customer{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3"> 
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-text">
+                            <a href="{{ url('customer_edit_profile') }}" "><i class="material-icons">people</i> Account</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                        <div class="col-md-3"> 
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-text">
+                            <a href="{{ url('customer_edit_password') }}" "><i class="material-icons">key</i> Change password</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{{ url('booking_history') }}"><i class="material-icons">history</i> Histories</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{{ url('app_shop') }}"><i class="material-icons">book_online</i> Appointment</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

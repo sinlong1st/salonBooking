@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+
+
+    <div class="row mb-5">
+        <div class="col-7">
+            <h1>All in One</h1>
+            <h6>At-home and store salon service</h6>
+            {% if loggedIn == true %}
+                <a href="{{ url('customer')}}" class="btn btn-outline-primary">Edit Profile</a>
+            {% else %}
+                <a href="{{ url('customer_login')}}" class="btn btn-outline-primary">Login/Signup</a>
+            {% endif %}
+        </div>
+        <div class="col-5">
+            <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+        </div>
+    </div>
+    <div class="row">
+        {% for service in services %}
+            <div class="card p-0 mx-2" style="width: 14rem;">
+                {% if service.Thumbnail is not empty %}
+                    <img src="{{ service.Thumbnail }}" width="125px" />
+                {% else %}
+                    <svg class="d-flex justify-content-center m-auto mt-2 rounded-circle" width="125px" height="125px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text></svg>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ service.Name }}</h5>
+                    {% if service.Description is not empty %}
+                        <p class="card-text">{{ service.Description }}</p>
+                    {% endif %}
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

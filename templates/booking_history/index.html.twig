@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Booking History{% endblock %}
+
+{% block body %}
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Service</th>
+                <th>Shop</th>
+                <th>Time</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if bookingdata|length > 0 %}
+                {% for item in bookingdata %}
+                    <tr>
+                        <td>{{ item["date"]|date("m/d/Y") }}</td>
+                        <td>{{ item["ServiceName"] }}</td>
+                        <td>{{ item["ShopName"] }}</td>
+                        <td>{{ item["start_time"]|date("H:i") }}</td>
+                        <td>
+                           
+                            {% if item["date"]|date("Ymd") > "now"|date('Ymd') or (item["date"]|date("Ymd") == "now"|date('Ymd') and item["start_time"]|date("Hi")|number_format > "now"|date('Hi')|number_format) %}
+                                <a href="{{ url('booking_cancel',{id:item["id"]}) }}" class="btn btn-primary btn-sm">Cancel booking</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4"></td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

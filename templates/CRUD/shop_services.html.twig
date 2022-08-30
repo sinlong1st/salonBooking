@@ -1,0 +1,23 @@
+{% extends '@SonataAdmin/standard_layout.html.twig' %}
+{% block sonata_admin_content %}
+    <form method="post">
+        <div class="form-group row">
+            {% for service in services %}
+                <div class="service-group mb-1 col">
+                    <div class="input-group">
+                        <div class="input-group-text">
+                            <label>
+                                <input type="checkbox" value="{{ service.id }}" name="services[]" {% if listDefault[service.id] is defined %}checked="checked"{% endif %} class="form-check-input shop-service-selected" data-sonata-icheck="false" />
+                                {{ service.Name }}</label>
+                        </div>
+                        <input type="number" name="prices[{{ service.id}}]" value="{% if listDefault[service.id] is defined %}{{ listDefault[service.id]['price'] }}{% endif %}" class="form-control shop-service-selected-price {% if listDefault[service.id] is not defined %}d-none{% endif %}"  />
+                        <input type="number" name="service_time[{{ service.id}}]" value="{% if listDefault[service.id] is defined %}{{ listDefault[service.id]['service_time'] }}{% endif %}" class="form-control shop-service-selected-price {% if listDefault[service.id] is not defined %}d-none{% endif %}"  />
+                    </div>
+                </div>
+            {% endfor %}
+        </div> 
+        <div class="form-group">
+            <button type="submit" class='btn btn-primary'>Submit</button> <a href='{{ listLink }}' class='btn btn-secondary'>Cancel</a>
+        </div> 
+    </form>
+{%  endblock %}

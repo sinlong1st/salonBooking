@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Booking{% endblock %}
+
+{% block body %}
+    <form action="{{url('booking_appointment')}}" method="post" >
+        <div class="row" id="booking">
+            <div class="col-md-4 col-sm-12 booking-column-wrapper">
+                {% for shop in shops %}
+                    <div class="card booking-shop" data-url="{{ url('load_service',{id:shop.id}) }}">
+                        {#<img class="card-img-top" src="..." alt="Card image cap">#}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ shop.Name }}</h5>
+                            <p class="card-text">{{ shop.address1 }}{{ shop.address2 }}, {{ shop.city }}, {{ shop.state }}, {{ shop.zipcode }}, {{ shop.country }}
+                            </p>
+                            <input type="radio" name="bookingshop" value="{{ shop.id }}" />
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-md-3 col-sm-12 booking-column-wrapper" id="shop-products-column"></div>
+            <div class="col-md-3 col-sm-12" id="work-calendar-column" data-refresh-url="{{ url('load_availabletime')}}">
+                <input type="text" name="date" id="datepicker" class="form-control d-none"/>
+            </div>
+            <div class="col-md-2 col-sm-12 booking-column-wrapper" id="time-available-column"></div>
+        </div>
+        <div class="form-group position-fixed bottom-0 end-0 mr-5 d-none" id="action-buttons">
+            <button type="submit" class="btn btn-primary mb-3 mr-3">Appointment</button>
+        </div>
+    </form>
+{% endblock %}

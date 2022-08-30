@@ -1,0 +1,46 @@
+import 'bootstrap';
+
+$(document).ready(function () {
+    if ($('#booking').length > 0) {
+        $(document).on('click', '.booking-shop', function (e) {
+            e.preventDefault();
+            let url = $(this).data('url');
+            $.get(url, function (data) {
+                $('#shop-products').html('');
+                $(data.shop).each(function(index,row){
+
+                    let html = '';
+                    html += '<div class="card shop-service" data-url="'+data.url+'" data-shopid="'+row.shop_id+'" data-serviceid="'+row.service_id+'">';
+                    html +='<div class="card-body">';
+                    html +='<h5 class="card-title">'+row.name+'</h5>';
+                    html +='<span>Price: $'+row.price+'</span>';
+                    html +='</div>';
+                    html+='</div>';
+                    $('#shop-products').append(html);
+                });
+            });
+        });
+
+        $(document).on('click', '.shop-service', function (e) {
+            e.preventDefault();
+            //let shop_id = $(this).data('shopid');
+            let service_id = $(this).data('serviceid');
+            let url = $(this).data('url');
+            $.get(url,{'id_service': service_id} , function (data) {
+                $('#avai-times').html('');
+                console.log(data);
+                $(data).each(function(index,row){
+                    let html = '';
+                    html += '<div class="card-title"';
+                    html +='<div class="card-text">';
+                    html +='<span>'+row.name+'<span>';
+                    html +='</div>';
+                    html+='</div>';
+                    $('#avai-times').append(html);
+                });
+            });
+        });
+
+
+    }
+});
